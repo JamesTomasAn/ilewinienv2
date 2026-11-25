@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ile winien? – podział paragonu</title>
+  <meta name="theme-color" content="#2f6f5e">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Ile winien?</h1>
+    <p>Zeskanuj paragon, przypisz pozycje do osób, a strona policzy, kto ile oddaje.</p>
+  </header>
+
+  <main>
+    <section class="card" id="people-card">
+      <h2>1. Osoby</h2>
+      <div class="people" id="people"></div>
+      <label class="payer">Kto zapłacił za paragon?
+        <select id="payer"></select>
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>2. Paragon</h2>
+      <div class="scan-buttons">
+        <label class="btn primary">📷 Zrób zdjęcie
+          <input type="file" accept="image/*" capture="environment" id="camera-input" hidden>
+        </label>
+        <label class="btn">🖼️ Wybierz z galerii
+          <input type="file" accept="image/*" id="file-input" hidden>
+        </label>
+      </div>
+      <p class="hint">Najlepiej: paragon płasko, dobre światło, zdjęcie z góry, kadr tylko na listę produktów.</p>
+      <div id="preview-wrap" hidden><img id="preview" alt="Podgląd paragonu"></div>
+      <div id="progress-wrap" hidden>
+        <div class="progress"><div id="progress-bar"></div></div>
+        <p id="progress-text">Przygotowanie…</p>
+      </div>
+      <details id="raw-wrap">
+        <summary>Odczytany tekst (możesz go poprawić lub wkleić własny)</summary>
+        <textarea id="raw-text" rows="10" placeholder="Tu pojawi się tekst odczytany z paragonu…"></textarea>
+        <button class="btn" id="reparse">Odczytaj pozycje z tekstu</button>
+      </details>
+    </section>
+
+    <section class="card">
+      <h2>3. Pozycje</h2>
+      <p class="hint">Przy każdej pozycji kliknij, do kogo należy. Jeśli zaznaczysz kilka osób, koszt dzieli się po równo.</p>
+      <div class="bulk">
+        <span>Zaznacz wszystkie nieprzypisane dla:</span>
+        <span id="bulk-buttons"></span>
+      </div>
+      <ul id="items" class="items"></ul>
+      <p id="empty-items" class="empty">Brak pozycji – zeskanuj paragon albo dodaj pozycje ręcznie.</p>
+      <div class="row-actions">
+        <button class="btn" id="add-item">+ Dodaj pozycję</button>
+        <button class="btn danger" id="clear">Wyczyść wszystko</button>
+      </div>
+      <div id="check" class="check"></div>
+    </section>
+
+    <section class="card" id="summary-card">
+      <h2>4. Rozliczenie</h2>
+      <div id="summary" class="summary"></div>
+      <div id="settle" class="settle"></div>
+    </section>
+  </main>
+
+  <footer>Wszystko działa w Twojej przeglądarce – zdjęcie paragonu nie jest nigdzie wysyłane.</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="parser.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
